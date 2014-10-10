@@ -3,7 +3,6 @@ import os
 import sys
 
 results = []
-counter=0
 #script to find comments in all js files in sub-directories
 for root, dirnames, filenames in os.walk('D:\Dropbox\Dropbox\Skole\studass\oblig2_dump\oblig2-backup'):
     for filename in fnmatch.filter(filenames, '*.js'):
@@ -16,6 +15,7 @@ for root, dirnames, filenames in os.walk('D:\Dropbox\Dropbox\Skole\studass\oblig
                     n.strip()
                     temp=""
                     for j in n:
+                    #python doesnt speak ø,å
                         try:
                             if j=="\xe3":
                                 pass      
@@ -26,14 +26,9 @@ for root, dirnames, filenames in os.walk('D:\Dropbox\Dropbox\Skole\studass\oblig
                         except UnicodeEncodeError:
                             pass
                     n=temp
-
-                    #python doesnt speak ø
                     if n.startswith("//") and "oppg" not in n:
-                        counter+=1
-                        try: 
-                            results.append(n)
-                        except UnicodeEncodeError:
-                            pass
+                        
+                        results.append(n)
         except UnicodeDecodeError:
             pass
 
